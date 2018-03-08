@@ -1,0 +1,25 @@
+{
+  "name": "express-study",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "multer": "^1.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shoushuaigu/node-study.git"
+  },
+  "author": "gss",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shoushuaigu/node-study/issues"
+  },
+  "homepage": "https://github.com/shoushuaigu/node-study#readme"
+}
