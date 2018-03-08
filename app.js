@@ -8,4 +8,10 @@ app.use('/static',express.static('./public'));
 
 app.get('/',router.showIndex);
 
+
+// 404
+app.use(function(req,res) {
+    res.render()
+})
+
 app.listen(8000);
