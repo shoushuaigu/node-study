@@ -27,16 +27,11 @@
         </ul>
         
         <div class="row">
-            <% for(var i=0; i<lists.length; i++){ %>
+            <% for(var i=0; i<images.length; i++){ %>
                 <div class="col-xs-6 col-md-3">
-                    <a href="xc/<%= lists[i] %>" class="thumbnail">
-                        <img src="/static/images/404.jpg" alt="...">
-                    </a>
-                    <h4>
-                        <%= lists[i] %>
-                    </h4>
+                    <img src="<%= images[i] %>" alt="...">
                 </div>
-                <%}%>
+            <%}%>
         </div>
     </div>
     

@@ -25,20 +25,19 @@
                 <a href="/up">上传</a>
             </li>
         </ul>
-        
-        <div class="row">
-            <% for(var i=0; i<lists.length; i++){ %>
-                <div class="col-xs-6 col-md-3">
-                    <a href="xc/<%= lists[i] %>" class="thumbnail">
-                        <img src="/static/images/404.jpg" alt="...">
-                    </a>
-                    <h4>
-                        <%= lists[i] %>
-                    </h4>
-                </div>
-                <%}%>
-        </div>
     </div>
+    <form active="#" method="post" enctype="multipart/form-data">
+        <select class="form-control" name="where">
+            <% for(var i=0;i<wjj.length;i++){ %>
+                <option><%= wjj[i]%></option>
+            <% } %>
+        </select>
+        <div class="form-group">
+            <label for="exampleInputFile">限2M</label>
+            <input type="file" id="exampleInputFile" name="img">
+        </div>
+        <button type="submit" class="btn btn-default">上传</button>
+    </form>
     
     <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
