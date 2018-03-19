@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>留言板</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        h2{text-align: center;}
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h2>留言板</h2>
+        <div class="msg_b">
+        </div>
+        <textarea name="message" id="textarea_t" cols="30" rows="10">留言</textarea>
+        <button class="submit">提交</button>
+    </div>
+    <script src="/static/js/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        (function($){
+            $.get('http://127.0.0.1:8000/find',function(res){
+                var data = res;
+                // console.log(data);
+                for (let i = 0; i < data.length; i++) {
+                    let el = data[i];
+                    var media = document.createElement('div');
+                    $(media).addClass('.media');
+                    $(media).html('<div class="media-left">'+el.id+'</div >'+
+                        '<div class="media-body">'+
+                            '<div class="text">'+el.text+'</div>'+
+                        '</div>');
+                    $('.msg_b').append(media);
+                }
+            });
+
+            $('.submit').click(function(){
+                var msg = $('#textarea_t').val();
+                $.post('http://127.0.0.1:8000/insertMsg',{"message":msg}, function (res) {
+                    console.log(res);
+                    if(res.code == 1){
+                        $.get('http://127.0.0.1:8000/find', function (res) {
+                            var data = res;
+                            $('.msg_b').html('');
+                            for (let i = 0; i < data.length; i++) {
+                                let el = data[i];
+                                var media = document.createElement('div');
+                                $(media).addClass('.media');
+                                $(media).html('<div class="media-left">' + el.id + '</div >' +
+                                    '<div class="media-body">' +
+                                    '<div class="text">' + el.text + '</div>' +
+                                    '</div>');
+                                $('.msg_b').append(media);
+                            }
+                        })
+                    }
+                })
+            });
+
+        })(jQuery)
+    </script>
+</body>
+</html>
