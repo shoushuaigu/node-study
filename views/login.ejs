@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>注册</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            用户名：<input type="text" placeholder="请输入" class="username">
+        </div>
+        <div>
+            密码：<input type="password" class="pwd">
+        </div>
+        <div>
+            <button class="btn">注册</button>
+        </div>
+    </div>
+    <script src="/static/js/jquery-1.9.1.min.js"></script>
+    <script>
+        $('.btn').click(function(){
+            var name = $('.username').val();
+            var pwd = $('.pwd').val()
+            $.post("/login",{'name':name,'pwd':pwd},function(res){
+                console.log(res);
+                if(res.code == 1){
+                    location.href ='/';
+                }else if(res.code ==2){
+                    alert('用户名已注册');
+                }
+            })
+        })
+    </script>
+</body>
+</html>

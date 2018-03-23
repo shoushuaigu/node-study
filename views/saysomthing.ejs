@@ -23,13 +23,14 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         (function($){
-            $.get('http://127.0.0.1:8000/find',function(res){
-                var data = res;
-                // console.log(data);
+            var page = location.search.split('=')[1];
+            $.get('http://127.0.0.1:8000/find/?page='+ page,function(res){
+                var data = res.resultArr;
+                console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     let el = data[i];
                     var media = document.createElement('div');
-                    $(media).addClass('.media');
+                    $(media).addClass('media');
                     $(media).html('<div class="media-left">'+el.id+'</div >'+
                         '<div class="media-body">'+
                             '<div class="text">'+el.text+'</div>'+
@@ -40,23 +41,17 @@
 
             $('.submit').click(function(){
                 var msg = $('#textarea_t').val();
-                $.post('http://127.0.0.1:8000/insertMsg',{"message":msg}, function (res) {
+                $.post('http://127.0.0.1:8000/insertMsg',{"message":msg,"timer":new Date()}, function (res) {
                     console.log(res);
                     if(res.code == 1){
-                        $.get('http://127.0.0.1:8000/find', function (res) {
-                            var data = res;
-                            $('.msg_b').html('');
-                            for (let i = 0; i < data.length; i++) {
-                                let el = data[i];
-                                var media = document.createElement('div');
-                                $(media).addClass('.media');
-                                $(media).html('<div class="media-left">' + el.id + '</div >' +
-                                    '<div class="media-body">' +
-                                    '<div class="text">' + el.text + '</div>' +
-                                    '</div>');
-                                $('.msg_b').append(media);
-                            }
-                        })
+                        var index_num = $('.media-left:first').text() - 0 + 1;
+                        var media = document.createElement('div');
+                        $(media).addClass('media');
+                        $(media).html('<div class="media-left">' + index_num + '</div >' +
+                            '<div class="media-body">' +
+                            '<div class="text">' + $('#textarea_t').val() + '</div>' +
+                            '</div>');
+                        $('.msg_b').before(media);
                     }
                 })
             });
